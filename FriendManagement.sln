@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FriendManagement", "FriendManagement\FriendManagement.csproj", "{B25FD0CE-941C-4672-B819-D46EFDAFAB74}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B25FD0CE-941C-4672-B819-D46EFDAFAB74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B25FD0CE-941C-4672-B819-D46EFDAFAB74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B25FD0CE-941C-4672-B819-D46EFDAFAB74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B25FD0CE-941C-4672-B819-D46EFDAFAB74}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E39385A8-9E76-440B-A1E1-F1E415198AFA}
+	EndGlobalSection
+EndGlobal
