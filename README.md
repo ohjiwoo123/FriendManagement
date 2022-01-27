@@ -6,6 +6,8 @@ C#은 전역이라는 개념이 없어서 static과 멤버(class)를 잘 활용�
 class로 많은 것을 처리하는 것을 보니 Java 언어와 비슷한 점이 많은 것 같다.  
 아직 기본적인 private public protected 등의 개념이 부족한 것 같다.  
 
+**class Friend 내용을 Friend.cs로, class MyLibrary 내용을 MyLibrary.cs로 만들어서,  
+program.cs와 함께 사용 가능하다.**
 ```
 namespace
 {
