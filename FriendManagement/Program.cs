@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace FriendManagement
 {
+    delegate void Function();
     enum GenderType { NON, 남성, 여성 }
     static public class MyLibrary
     {
@@ -90,14 +91,22 @@ namespace FriendManagement
                 MyLibrary.ConsoleClear();
 
                 PrintAll();
-                switch (menuprint())
-                {
-                    case ConsoleKey.F1: Insert(); break;
-                    case ConsoleKey.F2: Select(); break;
-                    case ConsoleKey.F3: Update(); break;
-                    case ConsoleKey.F4: Delete(); break;
-                    case ConsoleKey.Escape: return;
-                }
+
+                // Non Delegate
+
+                //switch (menuprint())
+                //{
+                //    case ConsoleKey.F1: Insert(); break;
+                //    case ConsoleKey.F2: Select(); break;
+                //    case ConsoleKey.F3: Update(); break;
+                //    case ConsoleKey.F4: Delete(); break;
+                //    case ConsoleKey.Escape: return;
+                //}
+
+                // Using Delegate
+                Function[] func = { Insert, Select, Update, Delete };
+                int choice = menuprint() - ConsoleKey.F1;
+                func[choice]();
                 MyLibrary.ConsolePause();
             }
         }
