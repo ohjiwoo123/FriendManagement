@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace FriendManagement
 {
@@ -76,6 +78,8 @@ namespace FriendManagement
             Console.WriteLine(" [F2] 검색(Select)\n");
             Console.WriteLine(" [F3] 수정(Update)\n");
             Console.WriteLine(" [F4] 삭제(Delete)\n");
+            Console.WriteLine(" [F5] 저장(Save)\n");
+            Console.WriteLine(" [F6] 불러오기(Load)\n");
             Console.WriteLine(" [ESC] 프로그램종료\n");
             Console.WriteLine("******************************************************");
 
@@ -100,13 +104,24 @@ namespace FriendManagement
                 //    case ConsoleKey.F2: Select(); break;
                 //    case ConsoleKey.F3: Update(); break;
                 //    case ConsoleKey.F4: Delete(); break;
+                //    case ConsoleKey.F5: Save(); break;
+                //    case ConsoleKey.F6: Load(); break;
                 //    case ConsoleKey.Escape: return;
                 //}
 
                 // Using Delegate
-                Function[] func = { Insert, Select, Update, Delete };
+                Function[] func = { Insert, Select, Update, Delete, Save, Load };
                 int choice = menuprint() - ConsoleKey.F1;
-                func[choice]();
+                if(choice < 0 || choice >5 )
+                {
+                    Console.WriteLine("F1~F6 사이의 값만 입력해주세요");
+                    Thread.Sleep(1000);
+                    continue;
+                }
+                else
+                {
+                    func[choice]();
+                }
                 MyLibrary.ConsolePause();
             }
         }
@@ -124,7 +139,7 @@ namespace FriendManagement
             Console.WriteLine("Insert");
             string name = MyLibrary.InputString("이름을 입력하세요");
             int age = MyLibrary.InputInteger("나이를 입력하세요");
-            GenderType gender = (GenderType)MyLibrary.InputInteger("성별을 입력하세요");
+            GenderType gender = (GenderType)MyLibrary.InputInteger("성별을 번호로 입력하세요 (0=NULL, 1=남자, 2=여자)");
             Friend friend = new Friend(name,age,gender);
             ar.Add(friend);
         }
@@ -172,6 +187,54 @@ namespace FriendManagement
                     ar.Remove(x);
                     break;
                 }
+            }
+        }
+        static public void Save()
+        {
+            Console.WriteLine("Save");
+            FileStream fs = new FileStream(@"c:\Temp\AddrBook2.dat",   // file path
+                                                FileMode.CreateNew,    // file mode
+                                                FileAccess.Write);  // file access
+
+            BinaryWriter bw = new BinaryWriter(fs);
+
+            int Total = ar.Count();
+
+            bw.Write(Total);
+
+            for (int i=0; i<Total;i++)
+            {
+                bw.Write(ar[i].Name);
+                bw.Write(ar[i].Age);
+                bw.Write((int)ar[i].Gender);
+            }
+
+            for(int j=Total; j==0; j--)
+            {
+                ar.RemoveAt(j);
+            }
+
+            fs.Close();
+            bw.Close();
+        }
+
+        static public void Load()
+        {
+            Console.WriteLine("Load");
+            FileStream fs = new FileStream(@"c:\Temp\AddrBook2.dat",   // file path
+                                                FileMode.Open,    // file mode
+                                                FileAccess.Read);  // file access
+            BinaryReader br = new BinaryReader(fs);
+
+            int Total = br.ReadInt32();
+
+            for (int i=0; i<Total; i++)
+            {
+                string name = br.ReadString();
+                int age = br.ReadInt32();
+                GenderType gender = (GenderType)br.ReadInt32();
+                Friend friend = new Friend(name, age, gender);
+                ar.Add(friend);
             }
         }
     }
