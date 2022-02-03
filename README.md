@@ -22,4 +22,3 @@ namespace
 ```
 
 여기에서 추가로 internal class 와 동급의 위치에서 추가적인 class를 만든다. ex) class Friend  
-interclass 안에서 다시 class를 만들면..? 
